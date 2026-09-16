@@ -1,8 +1,8 @@
 from logging.config import fileConfig
 
 from alembic import context
-from meteoscope.database.connection import engine
 
+from meteoscope.database.connection import engine
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

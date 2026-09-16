@@ -8,7 +8,10 @@
     "format:check": "prettier --check .",
     "lint": "pnpm --filter frontend lint",
     "typecheck": "uv run mypy .",
-    "test": "uv run pytest"
+    "test": "uv run pytest",
+    "python_format": "uv run ruff check --fix",
+    "check_all": "pnpm run format:check && pnpm run lint && pnpm run typecheck && pnpm run test",
+    "fix_all": "pnpm run format && pnpm run python_format"
   },
   "keywords": [],
   "author": "",
