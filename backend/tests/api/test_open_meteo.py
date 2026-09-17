@@ -23,6 +23,8 @@ def test_get_forecast_returns_response() -> None:
         assert request.url.params["longitude"] == "2.3522"
         assert request.url.params["timezone"] == "Europe/Paris"
         assert request.url.params["hourly"] == ",".join(HOURLY_VARIABLES)
+        assert request.url.params["past_days"] == "7"
+        assert request.url.params["forecast_days"] == "0"
 
         return httpx.Response(200, json=expected_response)
 

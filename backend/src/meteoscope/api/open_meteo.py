@@ -1,5 +1,3 @@
-from typing import Any
-
 import httpx
 
 BASE_URL = "https://api.open-meteo.com/v1/forecast"
@@ -32,12 +30,14 @@ class OpenMeteoClient:
         latitude: float,
         longitude: float,
         timezone: str,
-    ) -> dict[str, Any]:
-        params: dict[str, str | float] = {
+    ) -> dict[str, str | float | int]:
+        params: dict[str, str | float | int] = {
             "latitude": latitude,
             "longitude": longitude,
             "hourly": ",".join(HOURLY_VARIABLES),
             "timezone": timezone,
+            "past_days": 7,
+            "forecast_days": 0,
         }
 
         response = self._client.get(BASE_URL, params=params)

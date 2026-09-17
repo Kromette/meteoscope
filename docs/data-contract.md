@@ -95,3 +95,7 @@ FOREIGN KEY (location_id) REFERENCES locations(id)
 ## Location identity
 
 A location is identified by the latitude and longitude returned by Open-Meteo. Meteoscope does not persist the coordinates originally requested by the user; the coordinates returned by Open-Meteo are considered the canonical coordinates for the location.
+
+### Historical data scope
+
+For the MVP, Meteoscope ingests hourly historical weather data for the previous 7 days from Open-Meteo. Only historical weather data is stored; forecast data is out of scope for the MVP and may be introduced in a later version.
