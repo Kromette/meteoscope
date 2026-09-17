@@ -1,1 +1,5 @@
 Generic single-database configuration.
+
+## migration creation
+
+uv run alembic revision -m "migration title"
