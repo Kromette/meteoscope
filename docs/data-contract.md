@@ -91,3 +91,7 @@ wind_gusts_10m DOUBLE PRECISION NOT NULL
 
 PRIMARY KEY (location_id, timestamp)
 FOREIGN KEY (location_id) REFERENCES locations(id)
+
+## Location identity
+
+A location is identified by the latitude and longitude returned by Open-Meteo. Meteoscope does not persist the coordinates originally requested by the user; the coordinates returned by Open-Meteo are considered the canonical coordinates for the location.

@@ -33,7 +33,7 @@ class OpenMeteoClient:
         longitude: float,
         timezone: str,
     ) -> dict[str, Any]:
-        params = {
+        params: dict[str, str | float] = {
             "latitude": latitude,
             "longitude": longitude,
             "hourly": ",".join(HOURLY_VARIABLES),
@@ -43,4 +43,9 @@ class OpenMeteoClient:
         response = self._client.get(BASE_URL, params=params)
         response.raise_for_status()
 
-        return response.json()
+        data = response.json()
+
+        if not isinstance(data, dict):
+            raise ValueError("Open-Meteo response must be a JSON object.")
+
+        return data

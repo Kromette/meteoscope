@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 import pytest
 
@@ -9,7 +10,7 @@ from meteoscope.ingestion.models import (
 from meteoscope.ingestion.parser import parse_forecast
 
 
-def make_forecast_response() -> dict:
+def make_forecast_response() -> dict[str, Any]:
     return {
         "latitude": 48.8566,
         "longitude": 2.3522,

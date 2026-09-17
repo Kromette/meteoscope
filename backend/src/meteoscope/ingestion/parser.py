@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from meteoscope.ingestion.models import (
     LocationData,
@@ -20,7 +21,7 @@ HOURLY_FIELDS = (
 
 
 def parse_forecast(
-    data: dict,
+    data: dict[str, Any],
 ) -> tuple[LocationData, list[WeatherObservationData]]:
     location = _parse_location(data)
     observations = _parse_observations(data)
@@ -28,7 +29,7 @@ def parse_forecast(
     return location, observations
 
 
-def _parse_location(data: dict) -> LocationData:
+def _parse_location(data: dict[str, Any]) -> LocationData:
     return LocationData(
         latitude=data["latitude"],
         longitude=data["longitude"],
@@ -38,7 +39,7 @@ def _parse_location(data: dict) -> LocationData:
 
 
 def _parse_observations(
-    data: dict,
+    data: dict[str, Any],
 ) -> list[WeatherObservationData]:
     hourly = data["hourly"]
 
