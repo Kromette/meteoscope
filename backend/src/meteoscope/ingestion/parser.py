@@ -34,7 +34,7 @@ def _parse_location(data: dict[str, Any]) -> LocationData:
     return LocationData(
         latitude=data["latitude"],
         longitude=data["longitude"],
-        timezone=ZoneInfo(data["timezone"]),
+        timezone=data["timezone"],
         elevation=data["elevation"],
     )
 

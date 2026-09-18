@@ -44,7 +44,7 @@ def test_parse_forecast_returns_location_and_observations() -> None:
     assert location == LocationData(
         latitude=48.8566,
         longitude=2.3522,
-        timezone=ZoneInfo("Europe/Paris"),
+        timezone="Europe/Paris",
         elevation=35.0,
     )
 
