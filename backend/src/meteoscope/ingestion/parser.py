@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from meteoscope.ingestion.models import (
     LocationData,
@@ -33,7 +34,7 @@ def _parse_location(data: dict[str, Any]) -> LocationData:
     return LocationData(
         latitude=data["latitude"],
         longitude=data["longitude"],
-        timezone=data["timezone"],
+        timezone=ZoneInfo(data["timezone"]),
         elevation=data["elevation"],
     )
 
@@ -53,11 +54,13 @@ def _parse_observations(
         raise ValueError("Hourly data arrays must have the same length.")
 
     observations = []
+    local_timezone = ZoneInfo(data["timezone"])
 
     for index, timestamp in enumerate(times):
         observations.append(
             WeatherObservationData(
-                timestamp=datetime.fromisoformat(timestamp),
+                timestamp = datetime.fromisoformat(timestamp)
+                    .replace(tzinfo=local_timezone),
                 temperature_2m=values["temperature_2m"][index],
                 apparent_temperature=values["apparent_temperature"][index],
                 relative_humidity_2m=values["relative_humidity_2m"][index],

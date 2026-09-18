@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -43,13 +44,13 @@ def test_parse_forecast_returns_location_and_observations() -> None:
     assert location == LocationData(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
+        timezone=ZoneInfo("Europe/Paris"),
         elevation=35.0,
     )
 
     assert observations == [
         WeatherObservationData(
-            timestamp=datetime(2026, 9, 16, 15, 0),
+            timestamp=datetime(2026, 9, 16, 15, 0, tzinfo=ZoneInfo("Europe/Paris")),
             temperature_2m=20.5,
             apparent_temperature=20.0,
             relative_humidity_2m=65,
@@ -62,7 +63,7 @@ def test_parse_forecast_returns_location_and_observations() -> None:
             wind_gusts_10m=20.0,
         ),
         WeatherObservationData(
-            timestamp=datetime(2026, 9, 16, 16, 0),
+            timestamp=datetime(2026, 9, 16, 16, 0, tzinfo=ZoneInfo("Europe/Paris")),
             temperature_2m=21.0,
             apparent_temperature=20.7,
             relative_humidity_2m=60,

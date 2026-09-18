@@ -1,5 +1,6 @@
 from datetime import datetime
 from unittest.mock import Mock
+from zoneinfo import ZoneInfo
 
 from meteoscope.ingestion.models import (
     LocationData,
@@ -37,19 +38,19 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
     location, observations = service.fetch_weather(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
+        timezone=ZoneInfo("Europe/Paris"),
     )
 
     assert location == LocationData(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
+        timezone=ZoneInfo("Europe/Paris"),
         elevation=35.0,
     )
 
     assert observations == [
         WeatherObservationData(
-            timestamp=datetime(2026, 9, 17, 10, 0),
+            timestamp=datetime(2026, 9, 17, 10, 0, tzinfo=ZoneInfo("Europe/Paris")),
             temperature_2m=20.5,
             apparent_temperature=20.0,
             relative_humidity_2m=65,
@@ -66,5 +67,5 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
     client.get_forecast.assert_called_once_with(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
+        timezone=ZoneInfo("Europe/Paris"),
     )
