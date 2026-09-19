@@ -21,7 +21,7 @@ def test_get_forecast_returns_response() -> None:
         assert request.url.path == "/v1/forecast"
         assert request.url.params["latitude"] == "48.8566"
         assert request.url.params["longitude"] == "2.3522"
-        assert request.url.params["timezone"] == "Europe/Paris"
+        assert request.url.params["timezone"] == "auto"
         assert request.url.params["hourly"] == ",".join(HOURLY_VARIABLES)
         assert request.url.params["past_days"] == "7"
         assert request.url.params["forecast_days"] == "0"
@@ -34,7 +34,6 @@ def test_get_forecast_returns_response() -> None:
     response = client.get_forecast(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
     )
 
     assert response == expected_response
@@ -51,7 +50,6 @@ def test_get_forecast_raises_for_http_error() -> None:
         client.get_forecast(
             latitude=48.8566,
             longitude=2.3522,
-            timezone="Europe/Paris",
         )
     except httpx.HTTPStatusError as exc:
         assert exc.response.status_code == 500

@@ -20,12 +20,10 @@ class WeatherIngestionService:
         *,
         latitude: float,
         longitude: float,
-        timezone: str,
     ) -> tuple[LocationData, list[WeatherObservationData]]:
         response = self._client.get_forecast(
             latitude=latitude,
             longitude=longitude,
-            timezone=timezone,
         )
 
         return parse_forecast(response)

@@ -29,13 +29,12 @@ class OpenMeteoClient:
         *,
         latitude: float,
         longitude: float,
-        timezone: str,
     ) -> dict[str, str | float | int]:
         params: dict[str, str | float | int] = {
             "latitude": latitude,
             "longitude": longitude,
             "hourly": ",".join(HOURLY_VARIABLES),
-            "timezone": timezone,
+            "timezone": "auto",
             "past_days": 7,
             "forecast_days": 0,
         }

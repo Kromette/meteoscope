@@ -1,8 +1,9 @@
 import os
+from collections.abc import Generator
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 load_dotenv()
 
@@ -16,3 +17,8 @@ engine = create_engine(
 SessionLocal = sessionmaker(
     bind=engine,
 )
+
+
+def get_db_session() -> Generator[Session]:
+    with SessionLocal() as session:
+        yield session

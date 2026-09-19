@@ -38,14 +38,13 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
     location, observations = service.fetch_weather(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
     )
 
     assert location == LocationData(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
         elevation=35.0,
+        timezone="Europe/Paris",
     )
 
     assert observations == [
@@ -67,5 +66,4 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
     client.get_forecast.assert_called_once_with(
         latitude=48.8566,
         longitude=2.3522,
-        timezone="Europe/Paris",
     )
