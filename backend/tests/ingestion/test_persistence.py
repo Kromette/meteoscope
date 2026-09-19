@@ -1,5 +1,4 @@
 from datetime import datetime
-from zoneinfo import ZoneInfo
 from unittest.mock import Mock
 
 from sqlalchemy import delete, select
@@ -78,18 +77,26 @@ def test_persist_weather_is_idempotent(test_session: Session) -> None:
     )
     session.commit()
 
-    locations = session.execute(
-        select(Location).where(
-            Location.latitude == location.latitude,
-            Location.longitude == location.longitude,
+    locations = (
+        session.execute(
+            select(Location).where(
+                Location.latitude == location.latitude,
+                Location.longitude == location.longitude,
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
-    stored_observations = session.execute(
-        select(WeatherObservation).where(
-            WeatherObservation.location_id == locations[0].id
+    stored_observations = (
+        session.execute(
+            select(WeatherObservation).where(
+                WeatherObservation.location_id == locations[0].id
+            )
         )
-    ).scalars().all()
+        .scalars()
+        .all()
+    )
 
     assert len(locations) == 1
     assert len(stored_observations) == 2

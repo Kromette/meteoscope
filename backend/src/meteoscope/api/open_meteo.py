@@ -30,8 +30,8 @@ class OpenMeteoClient:
         latitude: float,
         longitude: float,
         timezone: str,
-    ) -> dict[str, str | float | int ]:
-        params: dict[str, str | float | int ] = {
+    ) -> dict[str, str | float | int]:
+        params: dict[str, str | float | int] = {
             "latitude": latitude,
             "longitude": longitude,
             "hourly": ",".join(HOURLY_VARIABLES),

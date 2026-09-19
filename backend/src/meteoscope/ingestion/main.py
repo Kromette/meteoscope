@@ -7,6 +7,7 @@ from meteoscope.config import (
 from meteoscope.database.connection import SessionLocal
 from meteoscope.ingestion.service import WeatherIngestionService
 
+
 def main() -> None:
     client = OpenMeteoClient()
     service = WeatherIngestionService(client=client)

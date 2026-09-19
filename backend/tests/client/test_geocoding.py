@@ -4,7 +4,7 @@ from meteoscope.api.geocoding import GeocodingClient
 
 
 def test_search_locations_returns_response() -> None:
-    expected_response = [{
+    expected_response = {
         "results": [
             {
                 "id": 2988507,
@@ -23,7 +23,7 @@ def test_search_locations_returns_response() -> None:
                 "admin4": "Paris",
             }
         ],
-    }]
+    }
 
     def handler(request: httpx.Request) -> httpx.Response:
         assert request.url.path == "/v1/search"
@@ -36,9 +36,6 @@ def test_search_locations_returns_response() -> None:
     http_client = httpx.Client(transport=httpx.MockTransport(handler))
     client = GeocodingClient(client=http_client)
 
-    response = client.search_locations(
-        name="Paris",
-        limit=10,
-    )
+    response = client.search_locations(name="Paris", limit=10, language="fr")
 
     assert response == expected_response

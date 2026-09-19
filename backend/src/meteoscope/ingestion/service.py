@@ -65,9 +65,7 @@ class WeatherIngestionService:
                 "apparent_temperature": observation.apparent_temperature,
                 "relative_humidity_2m": observation.relative_humidity_2m,
                 "precipitation": observation.precipitation,
-                "precipitation_probability": (
-                    observation.precipitation_probability
-                ),
+                "precipitation_probability": (observation.precipitation_probability),
                 "weather_code": observation.weather_code,
                 "cloud_cover": observation.cloud_cover,
                 "wind_speed_10m": observation.wind_speed_10m,
@@ -80,9 +78,7 @@ class WeatherIngestionService:
         if not observation_values:
             return
 
-        observation_insert = insert(WeatherObservation).values(
-            observation_values
-        )
+        observation_insert = insert(WeatherObservation).values(observation_values)
 
         observation_insert = observation_insert.on_conflict_do_nothing(
             index_elements=[

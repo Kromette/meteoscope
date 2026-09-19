@@ -14,9 +14,7 @@ def get_float_env(name: str) -> float:
     try:
         return float(value)
     except ValueError as exc:
-        raise ValueError(
-            f"Environment variable {name} must be a number."
-        ) from exc
+        raise ValueError(f"Environment variable {name} must be a number.") from exc
 
 
 def get_required_env(name: str) -> str:

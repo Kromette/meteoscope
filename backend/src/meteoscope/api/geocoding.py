@@ -2,6 +2,7 @@ import httpx
 
 BASE_URL = "https://geocoding-api.open-meteo.com/v1/search"
 
+
 class GeocodingClient:
     def __init__(
         self,
@@ -16,7 +17,7 @@ class GeocodingClient:
         name: str,
         limit: int = 10,
         language: str = "fr",
-    ) -> list[dict[str, object]]:
+    ) -> dict[str, object]:
         params: dict[str, str | int] = {
             "name": name,
             "limit": limit,
@@ -28,7 +29,7 @@ class GeocodingClient:
 
         data = response.json()
 
-        if not isinstance(data, list):
-            raise ValueError("Geocoding response must be a JSON array.")
+        if not isinstance(data, dict):
+            raise ValueError("Geocoding response must be a JSON object.")
 
         return data

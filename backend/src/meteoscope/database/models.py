@@ -30,10 +30,10 @@ class Location(Base):
             name="ck_locations_longitude",
         ),
         UniqueConstraint(
-        "latitude",
-        "longitude",
-        name="uq_locations_coordinates",
-    ),
+            "latitude",
+            "longitude",
+            name="uq_locations_coordinates",
+        ),
     )
 
 

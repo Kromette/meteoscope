@@ -6,4 +6,4 @@ from meteoscope.api.routes.search_location import router as search_location_rout
 app = FastAPI(title="MeteoScope API")
 
 app.include_router(health_router)
-app.include_router(search_location_router, prefix="/location/search")
+app.include_router(search_location_router)

@@ -59,15 +59,14 @@ def _parse_observations(
     for index, timestamp in enumerate(times):
         observations.append(
             WeatherObservationData(
-                timestamp = datetime.fromisoformat(timestamp)
-                    .replace(tzinfo=local_timezone),
+                timestamp=datetime.fromisoformat(timestamp).replace(
+                    tzinfo=local_timezone
+                ),
                 temperature_2m=values["temperature_2m"][index],
                 apparent_temperature=values["apparent_temperature"][index],
                 relative_humidity_2m=values["relative_humidity_2m"][index],
                 precipitation=values["precipitation"][index],
-                precipitation_probability=values[
-                    "precipitation_probability"
-                ][index],
+                precipitation_probability=values["precipitation_probability"][index],
                 weather_code=values["weather_code"][index],
                 cloud_cover=values["cloud_cover"][index],
                 wind_speed_10m=values["wind_speed_10m"][index],
