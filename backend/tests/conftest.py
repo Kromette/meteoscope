@@ -3,8 +3,10 @@ from collections.abc import Generator
 
 import pytest
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, delete
 from sqlalchemy.orm import Session, sessionmaker
+
+from meteoscope.database.models import Location, WeatherObservation
 
 load_dotenv()
 
@@ -24,3 +26,8 @@ TestSessionLocal = sessionmaker(
 def test_session() -> Generator[Session]:
     with TestSessionLocal() as session:
         yield session
+
+        session.rollback()
+        session.execute(delete(WeatherObservation))
+        session.execute(delete(Location))
+        session.commit()

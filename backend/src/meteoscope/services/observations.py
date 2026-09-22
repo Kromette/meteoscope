@@ -158,26 +158,21 @@ class ObservationsService:
             end_datetime=end_datetime,
         )
 
-        if len(observations) == 24:
-            return self._build_response(
-                location=location,
-                date=date,
-                observations=observations,
-            )
-        else:
+        if len(observations) != 24:
             self._fetch_and_persist_weather(
                 latitude=latitude,
                 longitude=longitude,
             )
-
             observations = self._find_observations(
                 location_id=location.id,
                 start_datetime=start_datetime,
                 end_datetime=end_datetime,
             )
+            if len(observations) != 24:
+                raise RuntimeError("Observations were not persisted correctly.")
 
-            return self._build_response(
-                location=location,
-                date=date,
-                observations=observations,
-            )
+        return self._build_response(
+            location=location,
+            date=date,
+            observations=observations,
+        )
