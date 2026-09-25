@@ -11,6 +11,7 @@ from meteoscope.schemas.observations import (
     ObservationData,
     ObservationsResponse,
 )
+from meteoscope.services.observation_datetime import is_complete_day
 
 
 class ObservationsService:
@@ -35,8 +36,11 @@ class ObservationsService:
             time.min,
             tzinfo=local_timezone,
         )
-
-        end_datetime = start_datetime + timedelta(days=1)
+        end_datetime = datetime.combine(
+            date,
+            time.max,
+            tzinfo=local_timezone,
+        ) + timedelta(microseconds=1)
 
         return start_datetime, end_datetime
 
@@ -158,7 +162,7 @@ class ObservationsService:
             end_datetime=end_datetime,
         )
 
-        if len(observations) != 24:
+        if not is_complete_day(observations, start_datetime, end_datetime):
             self._fetch_and_persist_weather(
                 latitude=latitude,
                 longitude=longitude,
@@ -168,7 +172,7 @@ class ObservationsService:
                 start_datetime=start_datetime,
                 end_datetime=end_datetime,
             )
-            if len(observations) != 24:
+            if not is_complete_day(observations, start_datetime, end_datetime):
                 raise RuntimeError("Observations were not persisted correctly.")
 
         return self._build_response(

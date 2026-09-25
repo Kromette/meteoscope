@@ -9,6 +9,7 @@ from meteoscope.services.observations import ObservationsService
 
 client = TestClient(app)
 
+
 def test_get_observations_valid_request() -> None:
     service = Mock(spec=ObservationsService)
 

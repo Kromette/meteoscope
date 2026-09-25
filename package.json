@@ -26,6 +26,8 @@
   "packageManager": "pnpm@12.4.1",
   "type": "module",
   "devDependencies": {
-    "prettier": "^3.9.6"
+    "@tailwindcss/vite": "^4.3.3",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3"
   }
 }
