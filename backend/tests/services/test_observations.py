@@ -70,7 +70,7 @@ def test_fetches_weather_when_location_does_not_exist(test_session: Session) -> 
 
     client = Mock(spec=OpenMeteoClient)
 
-    client.get_forecast.return_value = {
+    client.get_historical_weather.return_value = {
         "latitude": 48.8566,
         "longitude": 2.3522,
         "timezone": "Europe/Paris",
@@ -102,7 +102,7 @@ def test_fetches_weather_when_location_does_not_exist(test_session: Session) -> 
         date=date(2026, 9, 17),
     )
 
-    client.get_forecast.assert_called_once_with(
+    client.get_historical_weather.assert_called_once_with(
         latitude=48.8566,
         longitude=2.3522,
     )
@@ -150,7 +150,7 @@ def test_fetches_weather_when_observations_are_incomplete(
 
     client = Mock(spec=OpenMeteoClient)
 
-    client.get_forecast.return_value = {
+    client.get_historical_weather.return_value = {
         "latitude": 48.8566,
         "longitude": 2.3522,
         "timezone": "Europe/Paris",
@@ -183,7 +183,7 @@ def test_fetches_weather_when_observations_are_incomplete(
         date=date(2026, 9, 17),
     )
 
-    client.get_forecast.assert_called_once_with(
+    client.get_historical_weather.assert_called_once_with(
         latitude=48.8566,
         longitude=2.3522,
     )

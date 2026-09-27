@@ -1,0 +1,72 @@
+.app {
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header span {
+  color: #6b7280;
+}
+
+.dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.current-weather {
+  padding: 2rem;
+  border-radius: 16px;
+  background: #f3f4f6;
+}
+
+.location {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.temperature {
+  margin: 1rem 0 0;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.condition {
+  margin: 0.5rem 0 0;
+  color: #6b7280;
+}
+
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.weather-card {
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.weather-card h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.weather-card p {
+  margin: 1rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}

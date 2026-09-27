@@ -1,3 +1,4 @@
+# ruff: noqa: B008
 from datetime import date
 from typing import Annotated
 

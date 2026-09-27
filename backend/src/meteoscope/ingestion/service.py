@@ -21,7 +21,7 @@ class WeatherIngestionService:
         latitude: float,
         longitude: float,
     ) -> tuple[LocationData, list[WeatherObservationData]]:
-        response = self._client.get_forecast(
+        response = self._client.get_historical_weather(
             latitude=latitude,
             longitude=longitude,
         )

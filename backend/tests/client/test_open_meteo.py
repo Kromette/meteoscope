@@ -6,7 +6,7 @@ from meteoscope.api.open_meteo import (
 )
 
 
-def test_get_forecast_returns_response() -> None:
+def test_get_historical_weather_returns_response() -> None:
     expected_response = {
         "latitude": 48.8566,
         "longitude": 2.3522,
@@ -31,7 +31,7 @@ def test_get_forecast_returns_response() -> None:
     http_client = httpx.Client(transport=httpx.MockTransport(handler))
     client = OpenMeteoClient(client=http_client)
 
-    response = client.get_forecast(
+    response = client.get_historical_weather(
         latitude=48.8566,
         longitude=2.3522,
     )
@@ -39,7 +39,7 @@ def test_get_forecast_returns_response() -> None:
     assert response == expected_response
 
 
-def test_get_forecast_raises_for_http_error() -> None:
+def test_get_historical_weather_raises_for_http_error() -> None:
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(500)
 
@@ -47,7 +47,7 @@ def test_get_forecast_raises_for_http_error() -> None:
     client = OpenMeteoClient(client=http_client)
 
     try:
-        client.get_forecast(
+        client.get_historical_weather(
             latitude=48.8566,
             longitude=2.3522,
         )

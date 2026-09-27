@@ -31,7 +31,7 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
     }
 
     client = Mock()
-    client.get_forecast.return_value = response
+    client.get_historical_weather.return_value = response
 
     service = WeatherIngestionService(client=client)
 
@@ -63,7 +63,7 @@ def test_fetch_weather_fetches_and_parses_forecast() -> None:
         )
     ]
 
-    client.get_forecast.assert_called_once_with(
+    client.get_historical_weather.assert_called_once_with(
         latitude=48.8566,
         longitude=2.3522,
     )

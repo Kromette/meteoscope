@@ -24,7 +24,7 @@ class OpenMeteoClient:
     ) -> None:
         self._client = client or httpx.Client(timeout=timeout)
 
-    def get_forecast(
+    def get_historical_weather(
         self,
         *,
         latitude: float,

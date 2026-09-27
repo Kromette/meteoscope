@@ -5,9 +5,11 @@ from sqlalchemy.orm import Session
 
 from meteoscope.api.geocoding import GeocodingClient
 from meteoscope.api.open_meteo import OpenMeteoClient
+from meteoscope.api.open_meteo_marine import OpenMeteoMarineClient
 from meteoscope.database.connection import get_db_session
 from meteoscope.ingestion.service import WeatherIngestionService
 from meteoscope.services.location_search import LocationSearchService
+from meteoscope.services.marine import MarineService
 from meteoscope.services.observations import ObservationsService
 
 
@@ -25,3 +27,8 @@ def get_observations_service(
         session=session,
         ingestion_service=WeatherIngestionService(client=client),
     )
+
+
+def get_marine_service() -> MarineService:
+    client = OpenMeteoMarineClient()
+    return MarineService(client)

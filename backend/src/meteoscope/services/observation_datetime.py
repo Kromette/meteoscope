@@ -1,10 +1,14 @@
+from collections.abc import Sequence
 from datetime import UTC, datetime, timedelta
+from typing import Protocol
 
-from meteoscope.database.models import WeatherObservation
+
+class ObservationWithTimestamp(Protocol):
+    timestamp: datetime
 
 
 def is_complete_day(
-    observations: list[WeatherObservation],
+    observations: Sequence[ObservationWithTimestamp],
     start_datetime: datetime,
     end_datetime: datetime,
 ) -> bool:
