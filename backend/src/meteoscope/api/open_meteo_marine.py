@@ -93,7 +93,10 @@ class OpenMeteoMarineClient:
 
         data = response.json()
 
+        if isinstance(data, dict):
+            data = [data]
+
         if not isinstance(data, list):
-            raise ValueError("Open-Meteo Marine response must be a JSON array.")
+            raise ValueError("Open-Meteo Marine response must be a list.")
 
         return data

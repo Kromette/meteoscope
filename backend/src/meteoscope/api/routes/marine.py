@@ -1,7 +1,7 @@
 # ruff: noqa: B008
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 
 from meteoscope.api.dependencies import get_marine_service
 from meteoscope.schemas.marine import MarineResponse
@@ -16,7 +16,7 @@ def get_marine_weather(
         MarineService,
         Depends(get_marine_service),
     ],
-    latitude: list[float] = Query(..., ge=-90, le=90),
-    longitude: list[float] = Query(..., ge=-180, le=180),
+    latitude: float,
+    longitude: float,
 ) -> MarineResponse:
-    return service.get_marine_data(latitude=latitude, longitude=longitude)
+    return service.get_marine_data(latitude=[latitude], longitude=[longitude])

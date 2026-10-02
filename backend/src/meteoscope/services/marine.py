@@ -93,21 +93,17 @@ class MarineService:
         data: dict[str, Any],
         location_timezone: ZoneInfo,
     ) -> list[MarineMinutelyData]:
-        timestamps = self._build_timestamps(
-            start=data["time"],
-            end=data["time_end"],
-            interval=data["interval"],
-            location_timezone=location_timezone,
-        )
-
         return [
             MarineMinutelyData(
-                timestamp=timestamp,
+                timestamp=datetime.fromtimestamp(
+                    timestamp,
+                    tz=location_timezone,
+                ),
                 ocean_current_velocity=data["ocean_current_velocity"][index],
                 ocean_current_direction=data["ocean_current_direction"][index],
                 sea_level_height_msl=data["sea_level_height_msl"][index],
             )
-            for index, timestamp in enumerate(timestamps)
+            for index, timestamp in enumerate(data["time"])
         ]
 
     def _parse_hourly(
